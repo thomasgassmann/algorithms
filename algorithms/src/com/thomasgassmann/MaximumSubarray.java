@@ -1,6 +1,20 @@
 package com.thomasgassmann;
 
 public class MaximumSubarray {
+    public static int Inductive(int[] arr) {
+        int max = 0;
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            if (sum > max)
+                max = sum;
+            if (sum < 0)
+                sum = 0;
+        }
+
+        return max;
+    }
+
     public static int DivideAndConquer(int[] arr, int from, int toExclusive) {
         if (toExclusive - from == 1) {
             return Math.max(0, arr[0]);
