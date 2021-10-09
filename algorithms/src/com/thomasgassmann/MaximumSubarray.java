@@ -16,9 +16,8 @@ public class MaximumSubarray {
     }
 
     public static int DivideAndConquer(int[] arr, int from, int toExclusive) {
-        if (toExclusive - from == 1) {
+        if (toExclusive - from == 1)
             return Math.max(0, arr[0]);
-        }
 
         int split = from + (toExclusive - from) / 2;
         int firstMax = DivideAndConquer(arr, from, split);
