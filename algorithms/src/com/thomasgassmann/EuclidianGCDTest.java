@@ -9,5 +9,9 @@ public class EuclidianGCDTest {
         assertEquals(EuclidianGCD.GCD(15, 5), 5);
         assertEquals(EuclidianGCD.GCD(139472305678615L, 273426584985L), 5);
         assertEquals(EuclidianGCD.GCD(7, 13), 1);
+
+        assertEquals(EuclidianGCD.GCDIterative(15, 5), 5);
+        assertEquals(EuclidianGCD.GCDIterative(139472305678615L, 273426584985L), 5);
+        assertEquals(EuclidianGCD.GCDIterative(7, 13), 1);
     }
 }
