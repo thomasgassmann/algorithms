@@ -33,7 +33,7 @@ if __name__ == '__main__':
         xaxis.append(i)
         yaxis.append(c(i))
 
-        yref.append(0.005 * i ** 2)
+        yref.append(5 * i ** 1.5)
 
     plt.plot(xaxis, yaxis, label='f')
     plt.plot(xaxis, yref, label='ref')
