@@ -37,16 +37,24 @@ def d(n):
             l += 1
     return calls
 
+def e(n):
+    calls = 0
+    for j in range(1, n + 1):
+        for k in range(1, j + 1):
+            for l in range(1, k + 1):
+                calls += (n - l + 1)
+    return calls * 100
+
 if __name__ == '__main__':
     xaxis = []
     yaxis = []
     yref = []
-    for i in range(1, 1000000, 100000):
+    for i in range(1, 1000, 200):
         print(i)
         xaxis.append(i)
-        yaxis.append(d(i))
+        yaxis.append(e(i))
 
-        yref.append(0.7 * i * math.pow(math.log(i, 13), 2))
+        yref.append(25 * math.pow(i, 4))
 
     plt.plot(xaxis, yaxis, label='f')
     plt.plot(xaxis, yref, label='ref')

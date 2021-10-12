@@ -10,5 +10,10 @@ public class MaximumProductTests {
                 new long[] { 150, 350, 500, 400 },
                 new long[] { 150, 150, 200, -100 }
         ), 0.0001);
+
+        Assertions.assertEquals(100 / 3D, MaximumProduct.MaximumProductLog(
+                new long[] { 150, 350, 500, 400 },
+                new long[] { 150, 150, 200, -100 }
+        ), 0.0001);
     }
 }
