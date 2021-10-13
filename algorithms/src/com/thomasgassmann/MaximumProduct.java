@@ -28,4 +28,8 @@ public class MaximumProduct {
 
         return 100 * maxP - 100;
     }
+
+    public static double MaximumProductWithNegative(long[] is, long[] as) {
+        return 0;
+    }
 }
