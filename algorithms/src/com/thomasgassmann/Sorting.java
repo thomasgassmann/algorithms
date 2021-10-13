@@ -47,6 +47,38 @@ public class Sorting {
         }
     }
 
+    public static void InsertionSort(int[] a) {
+        if (a.length == 1) {
+            return;
+        }
+
+        for (int i = 1; i < a.length; i++) {
+            int b = a[i];
+
+            // find index where to insert b
+            int upper = i;
+            int lower = 0;
+            int middle = -1;
+            while (upper >= lower) {
+                middle = (upper + lower) / 2;
+                if (a[middle] < b) {
+                    lower = middle++ + 1;
+                } else if (a[middle] > b) {
+                    upper = middle - 1;
+                } else {
+                    break;
+                }
+            }
+
+            // insert element at
+            for (int j = i; j > middle; j--) {
+                a[j] = a[j - 1];
+            }
+
+            a[middle] = b;
+        }
+    }
+
     private static void Swap(int[] a, int i, int j) {
         int first = a[i];
         a[i] = a[j];
