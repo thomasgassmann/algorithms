@@ -31,6 +31,22 @@ public class Sorting {
         }
     }
 
+    public static void SelectionSort(int[] a) {
+        for (int i = a.length - 1; i > 0; i--) {
+            // largest item in [0, i]
+            int largestIndex = -1;
+            int largest = Integer.MIN_VALUE;
+            for (int j = 0; j <= i; j++) {
+                if (a[j] > largest) {
+                    largest = a[j];
+                    largestIndex = j;
+                }
+            }
+
+            Swap(a, largestIndex, i);
+        }
+    }
+
     private static void Swap(int[] a, int i, int j) {
         int first = a[i];
         a[i] = a[j];

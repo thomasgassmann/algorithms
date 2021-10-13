@@ -27,6 +27,14 @@ public class SortingTests {
         AssertEqual(a, r);
     }
 
+    @Test
+    public void TestSelectionSort() {
+        int[] a = new int[] { 4, 3, 7, 2, 7, 9, 1 };
+        int[] r = new int[] { 1, 2, 3, 4, 7, 7, 9 };
+        Sorting.SelectionSort(a);
+        AssertEqual(a, r);
+    }
+
     private void AssertEqual(int[] a, int[] b) {
         if (a.length != b.length) {
             Assertions.fail();
