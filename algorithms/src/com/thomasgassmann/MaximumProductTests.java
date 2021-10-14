@@ -20,8 +20,8 @@ public class MaximumProductTests {
     @Test
     public void MaximumProductWithNegativesCorrect() {
         Assertions.assertEquals(966.6666666666665, MaximumProduct.MaximumProductWithNegative(
-                new long[] { 5, 20, 10, -10, 5, 20, 60, 40 },
-                new long[] { 5, 10, -10, 0, 10, 10, 20, -40 }
+                new long[] { 10, 10, 20, -10, -5, 5 },
+                new long[] { 10, -10, -10, 0, 0, 0 }
         ), 0.0001);
     }
 }

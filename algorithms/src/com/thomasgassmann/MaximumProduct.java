@@ -30,6 +30,10 @@ public class MaximumProduct {
     }
 
     public static double MaximumProductWithNegative(long[] is, long[] as) {
+        int[] growth = new int[is.length - 1];
+        for (int i = 1; i < is.length; i++) {
+        }
+
         return 0;
     }
 }
