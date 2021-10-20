@@ -43,6 +43,14 @@ public class SortingTests {
         AssertEqual(a, r);
     }
 
+    @Test
+    public void TestExchangeSort() {
+        int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 7, 9, 1 };
+        int[] r = new int[] { 1, 2, 3, 4, 7, 7, 9, 10, 11, 15, 16, 23 };
+        Sorting.ExchangeSort(a);
+        AssertEqual(a, r);
+    }
+
     public static void AssertEqual(int[] a, int[] b) {
         if (a.length != b.length) {
             Assertions.fail();
