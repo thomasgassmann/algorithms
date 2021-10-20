@@ -79,7 +79,7 @@ public class Sorting {
         }
     }
 
-    private static void Swap(int[] a, int i, int j) {
+    public static void Swap(int[] a, int i, int j) {
         int first = a[i];
         a[i] = a[j];
         a[j] = first;

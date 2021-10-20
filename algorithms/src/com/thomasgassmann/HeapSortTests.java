@@ -4,6 +4,24 @@ import org.junit.jupiter.api.Test;
 
 public class HeapSortTests {
     @Test
+    public void CheckHeapSort() {
+        AssertHeapSort(
+                new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 7, 9, 1, 6 },
+                new int[] { 1, 2, 3, 4, 6, 7, 7, 9, 10, 11, 15, 16, 23 });
+        AssertHeapSort(
+                new int[] { 32, 57, 2, 7 },
+                new int[] { 2, 7, 32, 57 });
+        AssertHeapSort(
+                new int[] { 2, 2, 3, 3, 1, 10, 100 },
+                new int[] { 1, 2, 2, 3, 3, 10, 100 });
+    }
+
+    public void AssertHeapSort(int[] a, int[] b) {
+        HeapSort.HeapSort(a);
+        SortingTests.AssertEqual(a, b);
+    }
+
+    @Test
     public void HeapConditionIsRestored() {
         // array has heap condition
         int[] values = new int[] {
