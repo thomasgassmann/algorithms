@@ -43,7 +43,7 @@ public class SortingTests {
         AssertEqual(a, r);
     }
 
-    private void AssertEqual(int[] a, int[] b) {
+    public static void AssertEqual(int[] a, int[] b) {
         if (a.length != b.length) {
             Assertions.fail();
             return;
