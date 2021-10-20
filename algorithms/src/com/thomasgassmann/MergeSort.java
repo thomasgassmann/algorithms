@@ -10,6 +10,27 @@ public class MergeSort {
         }
     }
 
+    public static void NaturalMergeSort(int[] a) {
+        int left = 0;
+        do {
+            int right = 0;
+            while (right < a.length) {
+                left = right + 1;
+                int middle = left;
+                while (middle < a.length && a[middle] >= a[middle - 1])
+                    middle++;
+                if (middle < a.length) {
+                    right = middle + 1;
+                    while (right < a.length && a[right] >= a[right - 1])
+                        right++;
+                    Merge(a, left - 1, middle - 1, right - 1);
+                } else {
+                    right = a.length;
+                }
+            }
+        } while (left != 1);
+    }
+
     public static void StraightMergeSort(int[] arr) {
         int length = 1;
         while (length < arr.length) {
