@@ -1,6 +1,15 @@
 package com.thomasgassmann;
 
 public class MergeSort {
+    public static void MergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int middle = Math.floorDiv(left + right, 2);
+            MergeSort(arr, left, middle);
+            MergeSort(arr, middle + 1, right);
+            Merge(arr, left, middle, right);
+        }
+    }
+
     public static void Merge(int[] arr, int left, int middle, int right) {
         int[] b = new int[right - left + 1];
         int i = left;
