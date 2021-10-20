@@ -7,7 +7,7 @@ public class QuickSort {
         int pivot = a[right];
 
         do {
-            while (++i < right && a[i] < pivot);
+            while (a[++i] < pivot);
             while (--j > left && a[j] > pivot);
 
             if (i < j) {
