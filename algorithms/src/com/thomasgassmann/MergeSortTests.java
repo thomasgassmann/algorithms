@@ -23,4 +23,12 @@ public class MergeSortTests {
         MergeSort.MergeSort(a, 0, a.length - 1);
         SortingTests.AssertEqual(a, r);
     }
+
+    @Test
+    public void CheckStraightMergeSort() {
+        int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 7, 9, 1 };
+        int[] r = new int[] { 1, 2, 3, 4, 7, 7, 9, 10, 11, 15, 16, 23 };
+        MergeSort.StraightMergeSort(a);
+        SortingTests.AssertEqual(a, r);
+    }
 }

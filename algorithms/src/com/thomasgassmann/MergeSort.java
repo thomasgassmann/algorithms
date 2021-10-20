@@ -10,6 +10,21 @@ public class MergeSort {
         }
     }
 
+    public static void StraightMergeSort(int[] arr) {
+        int length = 1;
+        while (length < arr.length) {
+            int right = 0;
+            while (right + length < arr.length) {
+                int left = right + 1;
+                int middle = left + length - 1;
+                right = Math.min(middle + length, arr.length);
+                Merge(arr, left - 1, middle - 1, right - 1);
+            }
+
+            length *= 2;
+        }
+    }
+
     public static void Merge(int[] arr, int left, int middle, int right) {
         int[] b = new int[right - left + 1];
         int i = left;
