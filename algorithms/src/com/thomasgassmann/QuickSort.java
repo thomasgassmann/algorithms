@@ -1,5 +1,7 @@
 package com.thomasgassmann;
 
+import java.util.Random;
+
 public class QuickSort {
     public static void QuickSort(int[] a, int l, int r) {
         if (l >= 0 && r >= 0 && l < r) {
@@ -7,6 +9,21 @@ public class QuickSort {
             QuickSort(a, l, k);
             QuickSort(a, k + 1, r);
         }
+    }
+
+    public static void RandomizedQuickSort(int[] a, int l, int r) {
+        if (l >= 0 && r >= 0 && l < r) {
+            int k = RandomizedPartition(a, l, r);
+            QuickSort(a, l, k);
+            QuickSort(a, k + 1, r);
+        }
+    }
+
+    public static int RandomizedPartition(int[] a, int left, int right) {
+        var random = new Random();
+        var pos = random.nextInt(right - left + 1) + left;
+        Sorting.Swap(a, pos, a[right]);
+        return PartitionLecture(a, left, right);
     }
 
     public static int Partition(int[] a, int left, int right) {

@@ -21,6 +21,14 @@ public class QuickSortTests {
     }
 
     @Test
+    public void CheckRandomizedQuickSort() {
+        int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 9, 1 };
+        int[] r = new int[] { 1, 2, 3, 4, 7, 9, 10, 11, 15, 16, 23 };
+        QuickSort.RandomizedQuickSort(a, 0, a.length - 1);
+        SortingTests.AssertEqual(a, r);
+    }
+
+    @Test
     public void CheckPartition() {
         int[] values = new int[] { 56, 3, 6, 100, 6, 2, 84, 8, 4, 74, 6, 8 };
         int res = QuickSort.Partition(values, 0, values.length - 1);
