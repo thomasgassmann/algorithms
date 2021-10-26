@@ -2,7 +2,9 @@ package com.thomasgassmann;
 
 public class LongestIncreasingSubsequence {
     public static int[] LongestIncreasingSubsequence(int[] values) {
+        // stores last value of longest increasing subsequence for length l
         int[] T = new int[values.length + 1];
+        // stores previous elements
         int[] V = new int[values.length];
 
         T[0] = Integer.MIN_VALUE;
@@ -10,6 +12,9 @@ public class LongestIncreasingSubsequence {
             T[i] = Integer.MAX_VALUE;
 
         for (int i = 0; i < values.length; i++) {
+            // binary search a value such that
+            // T[l] < values[i] < T[l + 1]
+            // we then append values[i] to T[l] to form a new subsequence
             int l = 0;
             int r = T.length - 1;
             while (l <= r) {
@@ -25,7 +30,9 @@ public class LongestIncreasingSubsequence {
                     l = middle;
             }
 
+            // subsequence with l + 1 length, ending with values[i]
             T[l + 1] = values[i];
+            // storing the previous element
             V[i] = T[l];
         }
 
@@ -37,6 +44,7 @@ public class LongestIncreasingSubsequence {
             }
         }
 
+        // reconstruct sequence
         int[] res = new int[maxLength];
         res[maxLength - 1] = T[maxLength];
         int i = values.length - 1;
