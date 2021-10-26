@@ -59,4 +59,49 @@ public class LongestIncreasingSubsequence {
 
         return res;
     }
+
+    public static int[] LongestIncreasingSubsequenceWikipedia(int[] values) {
+        int[] p = new int[values.length];
+        int[] m = new int[values.length + 1];
+
+        int l = 0;
+        for (int i = 0; i < values.length; i++) {
+            int lo = 1;
+            int hi = l + 1;
+            // Binary search for the largest positive j ≤ L
+            // such that X[M[j]] < X[i]
+            while (lo < hi) {
+                int mid = lo + Math.floorDiv(hi - lo, 2);
+                if (values[m[mid]] < values[i]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+
+            // After searching, lo is 1 greater than the
+            // length of the longest prefix of X[i]
+            int newL = lo;
+
+            // The predecessor of X[i] is the last index of
+            // the subsequence of length newL-1
+            p[i] = m[newL - 1];
+            m[newL] = i;
+
+            // If we found a subsequence longer than any we've
+            // found yet, update L
+            if (newL > l)
+                l = newL;
+        }
+
+        // Reconstruct the longest increasing subsequence
+        int[] s = new int[l];
+        int k = m[l];
+        for (int i = l - 1; i >= 0; i--) {
+            s[i] = values[k];
+            k = p[k];
+        }
+
+        return s;
+    }
 }

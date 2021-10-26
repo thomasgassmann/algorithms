@@ -15,6 +15,9 @@ public class LongestIncreasingSubsequenceTests {
         for (int i = 0; i < values.length - 1; i += 2) {
             var res = LongestIncreasingSubsequence.LongestIncreasingSubsequence(values[i]);
             AssertionHelpers.AssertEqual(res, values[i + 1]);
+
+            var resW = LongestIncreasingSubsequence.LongestIncreasingSubsequenceWikipedia(values[i]);
+            AssertionHelpers.AssertEqual(resW, values[i + 1]);
         }
     }
 }
