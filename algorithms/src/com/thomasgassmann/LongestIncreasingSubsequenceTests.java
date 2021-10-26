@@ -7,7 +7,9 @@ public class LongestIncreasingSubsequenceTests {
     public void CheckSequences() {
         var values = new int[][] {
                 { 1, 1000, 1001, 2, 3, 4, 5, 999 },
-                { 1, 2, 3, 4, 5, 999 }
+                { 1, 2, 3, 4, 5, 999 },
+                { 1, 2, 5, 4, 3 },
+                { 1, 2, 3 }
         };
 
         for (int i = 0; i < values.length - 1; i += 2) {
