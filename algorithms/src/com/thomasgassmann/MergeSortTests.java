@@ -2,6 +2,8 @@ package com.thomasgassmann;
 
 import org.junit.jupiter.api.Test;
 
+import static com.thomasgassmann.AssertionHelpers.AssertEqual;
+
 public class MergeSortTests {
     @Test
     public void CheckMergeArray() {
@@ -13,7 +15,7 @@ public class MergeSortTests {
         };
         MergeSort.Merge(a, 0, 3, a.length - 1);
 
-        SortingTests.AssertEqual(a, res);
+        AssertEqual(a, res);
     }
 
     @Test
@@ -21,7 +23,7 @@ public class MergeSortTests {
         int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 7, 9, 1 };
         int[] r = new int[] { 1, 2, 3, 4, 7, 7, 9, 10, 11, 15, 16, 23 };
         MergeSort.MergeSort(a, 0, a.length - 1);
-        SortingTests.AssertEqual(a, r);
+        AssertEqual(a, r);
     }
 
     @Test
@@ -29,7 +31,7 @@ public class MergeSortTests {
         int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 7, 9, 1 };
         int[] r = new int[] { 1, 2, 3, 4, 7, 7, 9, 10, 11, 15, 16, 23 };
         MergeSort.StraightMergeSort(a);
-        SortingTests.AssertEqual(a, r);
+        AssertEqual(a, r);
     }
 
     @Test
@@ -37,6 +39,6 @@ public class MergeSortTests {
         int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 7, 9, 1 };
         int[] r = new int[] { 1, 2, 3, 4, 7, 7, 9, 10, 11, 15, 16, 23 };
         MergeSort.NaturalMergeSort(a);
-        SortingTests.AssertEqual(a, r);
+        AssertEqual(a, r);
     }
 }

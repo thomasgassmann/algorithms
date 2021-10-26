@@ -3,13 +3,15 @@ package com.thomasgassmann;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static com.thomasgassmann.AssertionHelpers.AssertEqual;
+
 public class QuickSortTests {
     @Test
     public void CheckQuickSort() {
         int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 9, 1 };
         int[] r = new int[] { 1, 2, 3, 4, 7, 9, 10, 11, 15, 16, 23 };
         QuickSort.QuickSort(a, 0, a.length - 1);
-        SortingTests.AssertEqual(a, r);
+        AssertEqual(a, r);
     }
 
     @Test
@@ -17,7 +19,7 @@ public class QuickSortTests {
         int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 9, 1 };
         int[] r = new int[] { 1, 2, 3, 4, 7, 9, 10, 11, 15, 16, 23 };
         QuickSort.QuickSortLecture(a, 0, a.length - 1);
-        SortingTests.AssertEqual(a, r);
+        AssertEqual(a, r);
     }
 
     @Test
@@ -25,7 +27,7 @@ public class QuickSortTests {
         int[] a = new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 9, 1 };
         int[] r = new int[] { 1, 2, 3, 4, 7, 9, 10, 11, 15, 16, 23 };
         QuickSort.RandomizedQuickSort(a, 0, a.length - 1);
-        SortingTests.AssertEqual(a, r);
+        AssertEqual(a, r);
     }
 
     @Test

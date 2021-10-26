@@ -1,7 +1,8 @@
 package com.thomasgassmann;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static com.thomasgassmann.AssertionHelpers.AssertEqual;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SortingTests {
@@ -49,16 +50,5 @@ public class SortingTests {
         int[] r = new int[] { 1, 2, 3, 4, 7, 7, 9, 10, 11, 15, 16, 23 };
         Sorting.ExchangeSort(a);
         AssertEqual(a, r);
-    }
-
-    public static void AssertEqual(int[] a, int[] b) {
-        if (a.length != b.length) {
-            Assertions.fail();
-            return;
-        }
-
-        for (int i = 0; i < a.length; i++) {
-            Assertions.assertEquals(a[i], b[i]);
-        }
     }
 }

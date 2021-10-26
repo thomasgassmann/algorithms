@@ -2,6 +2,8 @@ package com.thomasgassmann;
 
 import org.junit.jupiter.api.Test;
 
+import static com.thomasgassmann.AssertionHelpers.AssertEqual;
+
 public class HeapSortTests {
     @Test
     public void CheckHeapSort() {
@@ -18,7 +20,7 @@ public class HeapSortTests {
 
     public void AssertHeapSort(int[] a, int[] b) {
         HeapSort.HeapSort(a);
-        SortingTests.AssertEqual(a, b);
+        AssertEqual(a, b);
     }
 
     @Test
@@ -40,6 +42,6 @@ public class HeapSortTests {
         // we updated index 0
         HeapSort.RestoreHeapCondition(values, 0, values.length - 1);
 
-        SortingTests.AssertEqual(values, expected);
+        AssertEqual(values, expected);
     }
 }
