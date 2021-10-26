@@ -3,10 +3,10 @@ package com.thomasgassmann;
 public class HeapSort {
     public static void HeapSort(int[] arr) {
         for (int i = Math.floorDiv(arr.length - 1, 2); i >= 0; i--) {
-            RestoreHeapCondition(arr, i, arr.length);
+            RestoreHeapCondition(arr, i, arr.length - 1);
         }
 
-        for (int m = arr.length - 1; m > 1; m--) {
+        for (int m = arr.length - 1; m >= 1; m--) {
             Sorting.Swap(arr, 0, m);
             RestoreHeapCondition(arr, 0, m - 1);
         }
@@ -15,6 +15,7 @@ public class HeapSort {
     public static void RestoreHeapCondition(int[] arr, int i, int m) {
         // heap indicies are 1-based
         i++;
+        m++;
         while (2 * i <= m) {
             int j = 2 * i;
             if (j + 1 <= m && arr[j - 1] < arr[j])

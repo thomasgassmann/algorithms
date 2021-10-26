@@ -8,6 +8,9 @@ public class HeapSortTests {
     @Test
     public void CheckHeapSort() {
         AssertHeapSort(
+                new int[] { 3, 6, 5, 1, 2, 4, 8, 7 },
+                new int[] { 1, 2, 3, 4, 5, 6, 7, 8 });
+        AssertHeapSort(
                 new int[] { 4, 3, 7, 10, 11, 15, 23, 16, 2, 7, 9, 1, 6 },
                 new int[] { 1, 2, 3, 4, 6, 7, 7, 9, 10, 11, 15, 16, 23 });
         AssertHeapSort(
@@ -21,6 +24,16 @@ public class HeapSortTests {
     public void AssertHeapSort(int[] a, int[] b) {
         HeapSort.HeapSort(a);
         AssertEqual(a, b);
+    }
+
+    @Test
+    public void RestoreHeapConditionWithLimitedValues() {
+        var ar = new int[] { 1, 2, 3 };
+        HeapSort.RestoreHeapCondition(
+                ar, 0, 2
+        );
+
+        AssertEqual(ar, new int[] { 3, 2, 1 });
     }
 
     @Test
