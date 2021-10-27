@@ -9,6 +9,12 @@ public class LongestCommonSubstringTests {
         var a = "TIGER";
         var b = "ZIEGE";
         Assertions.assertEquals(
+                LongestCommonSubstring.LongestCommonSubstring(a, b),
+                "IGE");
+        Assertions.assertEquals(
+                LongestCommonSubstring.LongestCommonSubstring("PFERD", "RIND"),
+                "RD");
+        Assertions.assertEquals(
                 LongestCommonSubstring.LongestCommonSubstringRecursive(a, b),
                 3);
     }
