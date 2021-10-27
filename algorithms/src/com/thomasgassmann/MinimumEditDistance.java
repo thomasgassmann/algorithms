@@ -104,7 +104,7 @@ public class MinimumEditDistance {
                         dp[i - 1][j] + 1, // delete last char of A' (step back in A)
                         Math.min(
                                 dp[i][j - 1] + 1, // add char from B' to A' (step back in B)
-                                dp[i - 1][j - 1] + 1 - delta // replace ai by bj (step back both)
+                                dp[i - 1][j - 1] + 1     - delta // replace ai by bj (step back both)
                         )
                 );
             }
