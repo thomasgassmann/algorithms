@@ -101,10 +101,10 @@ public class MinimumEditDistance {
             for (int j = 1; j < dp[0].length; j++) {
                 int delta = a.charAt(i - 1) == b.charAt(j - 1) ? 1 : 0;
                 dp[i][j] = Math.min(
-                        dp[i - 1][j] + 1, // delete last char of A'
+                        dp[i - 1][j] + 1, // delete last char of A' (step back in A)
                         Math.min(
-                                dp[i][j - 1] + 1, // add char to B'
-                                dp[i - 1][j - 1] + 1 - delta // replace ai by bj
+                                dp[i][j - 1] + 1, // add char from B' to A' (step back in B)
+                                dp[i - 1][j - 1] + 1 - delta // replace ai by bj (step back both)
                         )
                 );
             }
