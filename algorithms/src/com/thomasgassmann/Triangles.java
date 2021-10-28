@@ -12,8 +12,7 @@ public class Triangles {
                     k++;
                 }
 
-                if (k > j)
-                    triangles += k - j - 1;
+                triangles += k - j - 1;
             }
         }
 
