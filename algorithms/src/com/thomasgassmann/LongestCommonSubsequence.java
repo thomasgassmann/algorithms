@@ -1,6 +1,6 @@
 package com.thomasgassmann;
 
-public class LongestCommonSubstring {
+public class LongestCommonSubsequence {
     public static String LongestCommonSubstring(String a, String b) {
         // init dp table
         int[][] dp = new int[a.length() + 1][b.length() + 1];
