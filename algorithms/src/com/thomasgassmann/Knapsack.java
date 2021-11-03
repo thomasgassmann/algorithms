@@ -3,10 +3,46 @@ package com.thomasgassmann;
 import java.util.ArrayList;
 
 public class Knapsack {
+    public static int[] DP(int[] values, int[] weights, int maxWeight) {
+        int[][] dp = new int[values.length + 1][maxWeight + 1];
+        for (int w = 0; w < dp[0].length; w++)
+            dp[0][w] = 0;
+
+        for (int i = 1; i < dp.length; i++) {
+            for (int w = 0; w < dp[0].length; w++) {
+                if (w >= weights[i - 1]) {
+                    dp[i][w] = Math.max(
+                            dp[i - 1][w],
+                            dp[i - 1][w - weights[i - 1]] + values[i - 1]
+                    );
+                } else {
+                    dp[i][w] = dp[i - 1][w];
+                }
+            }
+        }
+
+        int ci = values.length;
+        int cw = maxWeight;
+        int max = dp[ci][cw];
+        int currentSum = 0;
+        ArrayList<Integer> res = new ArrayList<>();
+        while (currentSum != max) {
+            if (dp[ci][cw] != dp[ci - 1][cw]) {
+                res.add(ci - 1);
+                cw -= weights[ci - 1];
+                currentSum += values[ci - 1];
+            }
+
+            ci--;
+        }
+
+        return res.stream().mapToInt(p -> p).toArray();
+    }
+
     public static int[] NaiveDP(int[] values, int[] weights, int maxWeight) {
         int valueSum = 0;
         for (int value : values) valueSum += value;
-        boolean[][][] doable = new boolean[values.length + 1][maxWeight][valueSum];
+        boolean[][][] doable = new boolean[values.length + 1][maxWeight + 1][valueSum];
 
         for (int i = 0; i < doable.length; i++)
             for (int w = 0; w < doable[0].length; w++)

@@ -20,6 +20,16 @@ public class KnapsackTests {
         int maxWeight = 5;
 
         int[] choice = Knapsack.NaiveDP(values, weights, maxWeight);
-        AssertionHelpers.AssertEqual(choice, new int[] { 2, 0 });
+        AssertionHelpers.AssertEqual(choice, new int[] { 3, 0 });
+    }
+
+    @Test
+    public void CheckDP() {
+        int[] weights = new int[] { 1, 2, 3, 4, 5 };
+        int[] values = new int[] { 100, 2, 4, 32, 2 };
+        int maxWeight = 5;
+
+        int[] choice = Knapsack.DP(values, weights, maxWeight);
+        AssertionHelpers.AssertEqual(choice, new int[] { 3, 0 });
     }
 }
