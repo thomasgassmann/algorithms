@@ -3,6 +3,60 @@ package com.thomasgassmann;
 import java.util.ArrayList;
 
 public class SubsetSum {
+    public static int[] SubsetSumDP(int[] values) {
+        int z = 0;
+        for (int i = 0; i < values.length; i++)
+            z += values[i];
+        if (z % 2 == 1)
+            return new int[0];
+        z /= 2;
+
+        boolean[][] dp = new boolean[values.length + 1][z + 1];
+        // with 0 things, we can have a 0 sum
+        dp[0][0] = true;
+        // not necessary, but we like to be explicit here
+        for (int i = 1; i <= z; i++)
+            dp[0][i] = false;
+
+        for (int i = 1; i <= values.length; i++) {
+            for (int j = 0; j <= z; j++) {
+                if (values[i - 1] > j) {
+                    // values[i] is greater than the current sum j
+                    // can we create sum j with i - 1 values?
+                    dp[i][j] = dp[i - 1][j];
+                } else {
+                    // values[i] is smaller or equal to the current sum j
+                    // either we can create a sum j with the previous i - 1 values
+                    // or we can create the sum j - values[i] with i - 1 values (and
+                    // then add values[i] to get the final value)
+                    dp[i][j] = dp[i - 1][j] || (j - values[i - 1] >= 0 && dp[i - 1][j - values[i - 1]]);
+                }
+            }
+        }
+
+        // can we create sum z with values.length values?
+        boolean exists = dp[values.length][z];
+        if (!exists)
+            return new int[0];
+
+        ArrayList<Integer> result = new ArrayList<>();
+        int k = values.length;
+        int s = z;
+        while (k > 0 && s >= 0) {
+            if (dp[k][s] == dp[k - 1][s]) {
+                // k not used, we can create s with k - 1 elements too
+                k--;
+            } else {
+                // we have to have dp[k][s] == dp[k - 1][s - values[k]] now
+                result.add(values[k - 1]);
+                k--;
+                s -= values[k];
+            }
+        }
+
+        return result.stream().mapToInt(i -> i).toArray();
+    }
+
     public static int[] DivideAndConquer(int[] values) {
         if (values.length % 2 == 1) {
             throw new IllegalArgumentException();
