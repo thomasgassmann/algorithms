@@ -9,4 +9,11 @@ public class SubsetSumTests {
                 1, 6, 2, 11, 6, 1, 6, 1
         }), new int[] { 6, 11 });
     }
+
+    @Test
+    public void CheckDivideAndConquer() {
+        AssertionHelpers.AssertEqual(SubsetSum.DivideAndConquer(new int[] {
+                1, 6, 2, 11, 6, 1, 6, 1
+        }), new int[] { 1, 2, 6, 1, 6, 1 });
+    }
 }
