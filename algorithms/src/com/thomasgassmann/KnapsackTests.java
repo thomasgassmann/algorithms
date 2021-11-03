@@ -12,4 +12,14 @@ public class KnapsackTests {
         int[] choice = Knapsack.Greedy(values, weights, maxWeight);
         AssertionHelpers.AssertEqual(choice, new int[] { 0, 1 });
     }
+
+    @Test
+    public void CheckNaiveDP() {
+        int[] weights = new int[] { 1, 2, 3, 4, 5 };
+        int[] values = new int[] { 100, 2, 4, 32, 2 };
+        int maxWeight = 5;
+
+        int[] choice = Knapsack.NaiveDP(values, weights, maxWeight);
+        AssertionHelpers.AssertEqual(choice, new int[] { 2, 0 });
+    }
 }
