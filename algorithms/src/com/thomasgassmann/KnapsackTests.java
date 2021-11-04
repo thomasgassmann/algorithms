@@ -42,4 +42,14 @@ public class KnapsackTests {
         int[] choice = Knapsack.DPWeightBased(values, weights, maxWeight);
         AssertionHelpers.AssertEqual(choice, new int[] { 3, 0 });
     }
+
+    @Test
+    public void CheckDPFPTAS() {
+        int[] weights = new int[] { 1, 2, 3, 4, 5 };
+        int[] values = new int[] { 1000, 2234, 4321, 32111, 2442 };
+        int maxWeight = 5;
+
+        int[] choice = Knapsack.DPFPTAS(values, weights, maxWeight, 0.01);
+        AssertionHelpers.AssertEqual(choice, new int[] { 3, 0 });
+    }
 }

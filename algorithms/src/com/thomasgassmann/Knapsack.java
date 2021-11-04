@@ -3,6 +3,20 @@ package com.thomasgassmann;
 import java.util.ArrayList;
 
 public class Knapsack {
+    // fully polynomial-time approximation scheme
+    public static int[] DPFPTAS(int[] values, int[] weights, int maxWeight, double epsilon) {
+        int vmax = Integer.MIN_VALUE;
+        for (int i = 0; i < values.length; i++)
+            vmax = Math.max(vmax, values[i]);
+        double K = (epsilon * vmax) / values.length;
+
+        int[] av = new int[values.length];
+        for (int i = 0; i < av.length; i++)
+            av[i] = (int)Math.floor(values[i] / K);
+
+        return DPWeightBased(values, weights, maxWeight);
+    }
+
     public static int[] DPWeightBased(int[] values, int[] weights, int maxWeight) {
         int valsum = 0;
         for (int val : values) valsum += val;
