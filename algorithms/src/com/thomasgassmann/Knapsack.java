@@ -3,6 +3,51 @@ package com.thomasgassmann;
 import java.util.ArrayList;
 
 public class Knapsack {
+    public static int[] DPWeightBased(int[] values, int[] weights, int maxWeight) {
+        int valsum = 0;
+        for (int val : values) valsum += val;
+        int[][] dp = new int[values.length + 1][valsum + 1];
+        dp[0][0] = 0; // 0 weight for 0 items with 0 value
+        for (int v = 1; v < dp[0].length; v++)
+            dp[0][v] = maxWeight + 1;
+
+        for (int i = 1; i < dp.length; i++) {
+            for (int v = 0; v < dp[0].length; v++) {
+                if (v >= values[i - 1]) {
+                    dp[i][v] = Math.min(
+                            dp[i - 1][v],
+                            dp[i - 1][v - values[i - 1]] + weights[i - 1]
+                    );
+                } else {
+                    dp[i][v] = dp[i - 1][v];
+                }
+            }
+        }
+
+        int largestV = 0;
+        int largestI = 0;
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                if (j > largestV && dp[i][j] <= maxWeight) {
+                    largestI = i;
+                    largestV = j;
+                }
+            }
+        }
+
+        ArrayList<Integer> res = new ArrayList<>();
+        while (largestV != 0) {
+            if (dp[largestI][largestV] != dp[largestI - 1][largestV]) {
+                res.add(largestI - 1);
+                largestV -= values[largestI - 1];
+            }
+
+            largestI--;
+        }
+
+        return res.stream().mapToInt(p -> p).toArray();
+    }
+
     public static int[] DP(int[] values, int[] weights, int maxWeight) {
         int[][] dp = new int[values.length + 1][maxWeight + 1];
         for (int w = 0; w < dp[0].length; w++)

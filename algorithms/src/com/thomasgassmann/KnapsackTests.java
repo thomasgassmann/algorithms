@@ -32,4 +32,14 @@ public class KnapsackTests {
         int[] choice = Knapsack.DP(values, weights, maxWeight);
         AssertionHelpers.AssertEqual(choice, new int[] { 3, 0 });
     }
+
+    @Test
+    public void CheckDPWeightBased() {
+        int[] weights = new int[] { 1, 2, 3, 4, 5 };
+        int[] values = new int[] { 100, 2, 4, 32, 2 };
+        int maxWeight = 5;
+
+        int[] choice = Knapsack.DPWeightBased(values, weights, maxWeight);
+        AssertionHelpers.AssertEqual(choice, new int[] { 3, 0 });
+    }
 }
