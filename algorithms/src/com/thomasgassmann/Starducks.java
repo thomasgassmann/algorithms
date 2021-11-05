@@ -34,9 +34,6 @@ public class Starducks {
         while (currentProfits != dp[profits.length - 1]) {
             if (dp[index] == dp[index - 1]) {
                 index--;
-            } else if (dp[index] == profits[index]) {
-                locations.add(index);
-                currentProfits += profits[index];
             } else {
                 locations.add(index);
                 currentProfits += profits[index];
