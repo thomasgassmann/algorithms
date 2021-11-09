@@ -11,11 +11,18 @@ public class LongestSnakeTests {
         Assertions.assertEquals(LongestSnake.LongestSnakeLength(
                 GetValues(),
                 GetNeighbors()), 11);
+        Assertions.assertEquals(LongestSnake.LongestSnakeLinearTimeLength(
+                GetValues(),
+                GetNeighbors()), 11);
     }
 
     @Test
     public void CheckLongestSnake() {
         AssertionHelpers.AssertEqual(LongestSnake.LongestSnake(
+                GetValues(),
+                GetNeighbors()
+        ), new int[] { 12, 7, 6, 10, 16, 21, 22, 23, 18, 17, 11 });
+        AssertionHelpers.AssertEqual(LongestSnake.LongestSnakeLinearTime(
                 GetValues(),
                 GetNeighbors()
         ), new int[] { 12, 7, 6, 10, 16, 21, 22, 23, 18, 17, 11 });

@@ -3,6 +3,76 @@ package com.thomasgassmann;
 import java.util.HashMap;
 
 public class LongestSnake {
+    public static int LongestSnakeLinearTimeLength(int[] values, HashMap<Integer, int[]> neighbors) {
+        int[] dp = new int[values.length];
+        for (int i = 0; i < dp.length; i++) {
+            if (dp[i] == 0) {
+                MoveToTail(dp, values, neighbors, i);
+            }
+        }
+
+        int max = 0;
+        for (int i = 0; i < dp.length; i++) {
+            max = Math.max(max, dp[i]);
+        }
+
+        return max;
+    }
+
+    public static int[] LongestSnakeLinearTime(int[] values, HashMap<Integer, int[]> neighbors) {
+        int[] dp = new int[values.length];
+        for (int i = 0; i < dp.length; i++) {
+            if (dp[i] == 0) {
+                MoveToTail(dp, values, neighbors, i);
+            }
+        }
+
+        int max = 0;
+        int maxI = 0;
+        for (int i = 0; i < dp.length; i++) {
+            if (dp[i] > max) {
+                max = dp[i];
+                maxI = i;
+            }
+        }
+
+        int[] res = new int[max];
+        while (max > 0) {
+            res[max - 1] = maxI;
+            int[] currentNeighbors = neighbors.get(maxI);
+            for (int i = 0; i < currentNeighbors.length; i++) {
+                int current = currentNeighbors[i];
+                if (dp[current] == max - 1) {
+                    maxI = current;
+                }
+            }
+
+            max--;
+        }
+
+        return res;
+    }
+
+    public static void MoveToTail(int[] dp, int[] values, HashMap<Integer, int[]> neighbors, int i) {
+        int[] currentNeighbors = neighbors.get(i);
+        for (int j = 0; j < currentNeighbors.length; j++) {
+            int currentNeighbor = currentNeighbors[j];
+            if (values[currentNeighbor] == values[i] - 1 && dp[currentNeighbor] == 0) {
+                MoveToTail(dp, values, neighbors, currentNeighbor);
+            }
+        }
+
+        int maxNeighbor = 0;
+        for (int j = 0; j < currentNeighbors.length; j++) {
+            if (values[currentNeighbors[j]] == values[i] - 1 &&
+                    dp[currentNeighbors[j]] > maxNeighbor) {
+                maxNeighbor = dp[currentNeighbors[j]];
+            }
+        }
+
+        dp[i] = maxNeighbor + 1;
+    }
+
     public static int[] LongestSnake(int[] values, HashMap<Integer, int[]> neighbors) {
         int[] dp = LongestSnakeDP(values, neighbors);
 
@@ -31,7 +101,6 @@ public class LongestSnake {
 
         return res;
     }
-
 
     public static int LongestSnakeLength(int[] values, HashMap<Integer, int[]> neighbors) {
         int[] dp = LongestSnakeDP(values, neighbors);
