@@ -53,7 +53,7 @@ public class LongestSnake {
         return res;
     }
 
-    public static void MoveToTail(int[] dp, int[] values, HashMap<Integer, int[]> neighbors, int i) {
+    public static void  MoveToTail(int[] dp, int[] values, HashMap<Integer, int[]> neighbors, int i) {
         int[] currentNeighbors = neighbors.get(i);
         for (int j = 0; j < currentNeighbors.length; j++) {
             int currentNeighbor = currentNeighbors[j];
