@@ -3,7 +3,48 @@ package com.thomasgassmann;
 import java.util.HashMap;
 
 public class LongestSnake {
-    public static int LongestSnake(int[] values, HashMap<Integer, int[]> neighbors) {
+    public static int[] LongestSnake(int[] values, HashMap<Integer, int[]> neighbors) {
+        int[] dp = LongestSnakeDP(values, neighbors);
+
+        int max = 0;
+        int maxI = 0;
+        for (int i = 0; i < dp.length; i++) {
+            if (dp[i] > max) {
+                maxI = i;
+                max = dp[i];
+            }
+        }
+
+        int[] res = new int[max];
+        while (max > 0) {
+            res[max - 1] = maxI;
+            int[] currentNeighbors = neighbors.get(maxI);
+            for (int i = 0; i < currentNeighbors.length; i++) {
+                int current = currentNeighbors[i];
+                if (dp[current] == max - 1) {
+                    maxI = current;
+                }
+            }
+
+            max--;
+        }
+
+        return res;
+    }
+
+
+    public static int LongestSnakeLength(int[] values, HashMap<Integer, int[]> neighbors) {
+        int[] dp = LongestSnakeDP(values, neighbors);
+
+        int max = 0;
+        for (int i = 0; i < dp.length; i++) {
+            max = Math.max(max, dp[i]);
+        }
+
+        return max;
+    }
+
+    public static int[] LongestSnakeDP(int[] values, HashMap<Integer, int[]> neighbors) {
         int[] dp = new int[values.length];
         IndexTuple[] tuples = new IndexTuple[values.length];
         for (int i = 0; i < values.length; i++)
@@ -18,7 +59,7 @@ public class LongestSnake {
             int maxLength = 0;
             for (int j = 0; j < neighborIndices.length; j++) {
                 if (values[neighborIndices[j]] == tuple.value - 1 &&
-                    dp[neighborIndices[j]] > maxLength) {
+                        dp[neighborIndices[j]] > maxLength) {
                     maxLength = dp[neighborIndices[j]];
                 }
             }
@@ -26,12 +67,7 @@ public class LongestSnake {
             dp[tuple.index] = maxLength + 1;
         }
 
-        int max = 0;
-        for (int i = 0; i < dp.length; i++) {
-            max = Math.max(max, dp[i]);
-        }
-
-        return max;
+        return dp;
     }
 
     public static void HeapSort(IndexTuple[] arr) {
