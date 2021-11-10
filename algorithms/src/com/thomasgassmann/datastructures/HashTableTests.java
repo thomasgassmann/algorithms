@@ -40,16 +40,26 @@ public class HashTableTests {
         CheckHashTableOps(table, 160);
     }
 
+    @Test
+    public void CheckCuckooHashing() {
+        var table = new CuckooHashTable(13);
+        CheckHashTableOps(table, 28);
+    }
+
     private void CheckHashTableOps(HashTable table, int bound) {
-        for (int i = 0; i < bound; i++) {
+        for (int i = 1; i < bound; i++) {
             table.insert(i);
+        }
+
+        for (int i = 1; i < bound; i++) {
+            Assertions.assertEquals(table.search(i), true);
         }
 
         for (int i = 1; i < bound; i += 2) {
             table.delete(i);
         }
 
-        for (int i = 0; i < bound; i++) {
+        for (int i = 1; i < bound; i++) {
             Assertions.assertEquals(table.search(i), i % 2 == 0);
         }
     }
