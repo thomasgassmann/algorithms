@@ -1,7 +1,33 @@
 package com.thomasgassmann.datastructures;
 
+import java.util.ArrayList;
+
 public class BinarySearchTree {
     private TreeNode _root;
+
+    public ArrayList<Integer> preorder() {
+        if (_root == null) {
+            return null;
+        }
+
+        return _root.preorder();
+    }
+
+    public ArrayList<Integer> postorder() {
+        if (_root == null) {
+            return null;
+        }
+
+        return _root.postorder();
+    }
+
+    public ArrayList<Integer> inorder() {
+        if (_root == null) {
+            return null;
+        }
+
+        return _root.inorder();
+    }
 
     public void insert(int value) {
         if (_root == null) {
