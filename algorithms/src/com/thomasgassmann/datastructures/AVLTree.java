@@ -129,8 +129,6 @@ public class AVLTree {
 
         u.left = w;
 
-        _root.assertParents();
-
         if (getBalance(u) == 1 && getBalance(w) == 1) {
             setBalance(u, u.getBalance());
             setBalance(w, w.getBalance());
