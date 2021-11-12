@@ -3,6 +3,7 @@ package com.thomasgassmann;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+// HS2021 07.3
 public class RoadTripTests {
     @Test
     public void checkRoadTrip() {
