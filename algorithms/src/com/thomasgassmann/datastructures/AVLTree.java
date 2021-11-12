@@ -26,6 +26,10 @@ public class AVLTree {
         return _root;
     }
 
+    public HashMap<AVLTreeNode, Integer> getBalances() {
+        return _balances;
+    }
+
     public void insert(int key) {
         if (_root == null) {
             _root = new AVLTreeNode(key, null, null, null);
@@ -66,22 +70,38 @@ public class AVLTree {
         }
     }
 
-    private void rightrotate(AVLTreeNode w) {
-        AVLTreeNode u = w.left;
-        if (w.parent != null) {
-            if (w.parent.right == w) {
-                w.parent.right = u;
+    private void rightrotate(AVLTreeNode v) {
+        AVLTreeNode u = v.left;
+        if (v.parent != null) {
+            if (v.parent.right == v) {
+                v.parent.right = u;
             } else {
-                w.parent.left = u;
+                v.parent.left = u;
             }
         } else {
             _root = u;
         }
 
-        u.parent = w.parent;
-        w.parent = u;
-        w.left = u.right;
-        u.right = w;
+        u.parent = v.parent;
+        v.left = u.right;
+        if (u.right != null) {
+            u.right.parent = v;
+        }
+
+        if (v.right != null) {
+            v.right.parent = v;
+        }
+
+        u.right = v;
+        v.parent = u;
+
+        if (getBalance(u) == -1 && getBalance(v) == -1) {
+            setBalance(u, u.getBalance());
+            setBalance(v, v.getBalance());
+        } else if (getBalance(u) == 0 && getBalance(v) == -1) {
+            setBalance(u, u.getBalance());
+            setBalance(v, v.getBalance());
+        }
     }
 
     private void leftrotate(AVLTreeNode w) {
@@ -99,7 +119,25 @@ public class AVLTree {
         u.parent = w.parent;
         w.parent = u;
         w.right = u.left;
+        if (u.left != null) {
+            u.left.parent = w;
+        }
+
+        if (w.left != null) {
+            w.left.parent = w;
+        }
+
         u.left = w;
+
+        _root.assertParents();
+
+        if (getBalance(u) == 1 && getBalance(w) == 1) {
+            setBalance(u, u.getBalance());
+            setBalance(w, w.getBalance());
+        } else if (getBalance(u) == 0 && getBalance(w) == 1) {
+            setBalance(u, u.getBalance());
+            setBalance(w, w.getBalance());
+        }
     }
 
     private int getBalance(AVLTreeNode node) {
