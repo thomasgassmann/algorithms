@@ -29,7 +29,7 @@ public class AVLTree {
     public void insert(int key) {
         if (_root == null) {
             _root = new AVLTreeNode(key, null, null, null);
-            _balances.put(_root, 0);
+            setBalance(_root, 0);
             return;
         }
 
@@ -47,21 +47,21 @@ public class AVLTree {
         }
 
         AVLTreeNode r = new AVLTreeNode(key, u,null, null);
-        _balances.put(r, 0);
+        setBalance(r, 0);
         if (u.key < r.key) {
             u.right = r;
         } else {
             u.left = r;
         }
 
-        if (_balances.get(u) == 0) {
-            _balances.put(u, u.left == r ? -1 : 1);
+        if (getBalance(u) == 0) {
+            setBalance(u, u.left == r ? -1 : 1);
             if (u.parent != null) {
                 upin(u);
             }
         } else {
             // either -1 or 1
-            _balances.put(u, 0);
+            setBalance(u, 0);
             // tree height didn't change, we're done
         }
     }
@@ -102,27 +102,35 @@ public class AVLTree {
         u.left = w;
     }
 
+    private int getBalance(AVLTreeNode node) {
+        return _balances.get(node);
+    }
+
+    private void setBalance(AVLTreeNode node, int value) {
+        _balances.put(node, value);
+    }
+
     private void upin(AVLTreeNode u) {
         AVLTreeNode w = u.parent;
-        if (_balances.get(w) == 0) {
-            _balances.put(w, w.left == u ? -1 : 1);
+        if (getBalance(w) == 0) {
+            setBalance(w, w.left == u ? -1 : 1);
             if (w.parent != null)
                 upin(w);
             return;
         }
 
-        if ((_balances.get(w) == 1 && w.left == u) ||
-            (_balances.get(w) == -1 && w.right == u)) {
-            _balances.put(w, 0);
+        if ((getBalance(w) == 1 && w.left == u) ||
+            (getBalance(w) == -1 && w.right == u)) {
+            setBalance(w, 0);
             return;
         }
 
         // we now either have bal(w) == 1 or bal(w) == -1
         // since by our invariant bal(u) != 0, we need to rebalance
         // the tree somehow
-        if (_balances.get(w) == -1) {
+        if (getBalance(w) == -1) {
             // bal(w) == -1
-            if (_balances.get(u) == -1) {
+            if (getBalance(u) == -1) {
                 // new key is in left part
                 // right rotation around w (u is new root, w right of u)
                 rightrotate(w);
@@ -133,7 +141,7 @@ public class AVLTree {
             }
         } else {
             // bal(w) == 1
-            if (_balances.get(u) == -1) {
+            if (getBalance(u) == -1) {
                 // new key is in left part
                 rightrotate(u);
                 leftrotate(w);
