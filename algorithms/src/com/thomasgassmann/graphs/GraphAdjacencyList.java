@@ -30,4 +30,8 @@ public class GraphAdjacencyList {
         _nodes[a].add(b);
         _nodes[b].add(a);
     }
+
+    public void addDirected(int a, int b) {
+        _nodes[a].add(b);
+    }
 }

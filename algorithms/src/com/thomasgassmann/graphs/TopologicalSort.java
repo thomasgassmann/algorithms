@@ -2,7 +2,9 @@ package com.thomasgassmann.graphs;
 
 import com.thomasgassmann.datastructures.Stack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class TopologicalSort {
     // script (more general)
@@ -38,7 +40,26 @@ public class TopologicalSort {
     }
 
     // lecture
-    public static void TopologicalSortForGraphsWithoutCycles() {
+    public static ArrayList<Integer> TopologicalSortForGraphsWithoutCycles(GraphAdjacencyList graph) {
+        var res = new ArrayList<Integer>();
+        var markings = new HashSet<Integer>();
+        for (var vertex : graph.getVertices()) {
+            if (!markings.contains(vertex)) {
+                visit(graph, markings, res, vertex);
+            }
+        }
 
+        return res;
+    }
+
+    private static void visit(GraphAdjacencyList graph, HashSet<Integer> markings, ArrayList<Integer> res, int vertex) {
+        markings.add(vertex);
+        for (var v : graph.getAdjacent(vertex)) {
+            if (!markings.contains(v)) {
+                visit(graph, markings, res, v);
+            }
+        }
+
+        res.add(vertex);
     }
 }
