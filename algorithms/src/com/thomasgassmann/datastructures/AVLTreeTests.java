@@ -10,8 +10,8 @@ public class AVLTreeTests {
     public void checkAVLTree() {
         // Arrange
         var tree = new AVLTree();
-        var random = new Random(100);
-        var values = new int[200];
+        var random = new Random(42);
+        var values = new int[250];
         for (int i = 0; i < values.length; i++)
             values[i] = random.nextInt(values.length);
 

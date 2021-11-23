@@ -1,11 +1,8 @@
 package com.thomasgassmann.datastructures;
 
-import java.util.HashMap;
-
 // for all vertices v in tree: bal(v) in {-1, 0, 1}
 public class AVLTree {
     private AVLTreeNode _root;
-    private HashMap<AVLTreeNode, Integer> _balances = new HashMap<>();
 
     public boolean contains(int key) {
         AVLTreeNode current = _root;
@@ -141,24 +138,14 @@ public class AVLTree {
             if (u.balance == -1) {
                 // new key is in left part
                 // right rotation around w (u is new root, w right of u)
-                rightrotate(w);
                 w.balance = 0;
                 u.balance = 0;
+                rightrotate(w);
             } else {
                 // bal(u) == 1
-                var prevBalance = u.right.balance;
+                w.balance = u.right.balance < 0 ? 1 : 0;
+                u.balance = u.right.balance > 0 ? -1 : 0;
                 u.right.balance = 0;
-                if (prevBalance < 0) {
-                    w.balance = 1;
-                    u.balance = 0;
-                } else if (prevBalance > 0) {
-                    w.balance = 0;
-                    u.balance = -1;
-                } else {
-                    w.balance = 0;
-                    u.balance = 0;
-                }
-
                 leftrotate(u);
                 rightrotate(w);
             }
@@ -166,27 +153,17 @@ public class AVLTree {
             // bal(w) == 1
             if (u.balance == -1) {
                 // new key is in left part
-                var prevBalance = u.left.balance;
+                w.balance = u.left.balance > 0 ? -1 : 0;
+                u.balance = u.left.balance < 0 ? 1 : 0;
                 u.left.balance = 0;
-                if (prevBalance < 0) {
-                    w.balance = 0;
-                    u.balance = 1;
-                } else if (prevBalance > 0) {
-                    w.balance = -1;
-                    u.balance = 0;
-                } else {
-                    w.balance = 0;
-                    u.balance = 0;
-                }
-
                 rightrotate(u);
                 leftrotate(w);
             } else {
                 // new key is in right part
                 // left rotation around w (u is new root, w left of u)
-                leftrotate(w);
                 w.balance = 0;
                 u.balance = 0;
+                leftrotate(w);
             }
         }
     }
