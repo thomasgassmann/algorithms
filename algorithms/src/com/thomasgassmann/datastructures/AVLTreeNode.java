@@ -2,8 +2,6 @@ package com.thomasgassmann.datastructures;
 
 import org.junit.jupiter.api.Assertions;
 
-import java.util.HashMap;
-
 public class AVLTreeNode {
     public AVLTreeNode(int key, AVLTreeNode parent, AVLTreeNode left, AVLTreeNode right) {
         this.key = key;
@@ -14,6 +12,7 @@ public class AVLTreeNode {
 
     public AVLTreeNode parent;
     public int key;
+    public int balance;
     public AVLTreeNode left;
     public AVLTreeNode right;
 
@@ -29,39 +28,21 @@ public class AVLTreeNode {
         }
     }
 
-    public int getBalance() {
+    public void assertBalances() {
         if (right == null && left == null) {
-            return 0;
-        }
-
-        if (right == null) {
-            return -1;
-        }
-
-        if (left == null) {
-            return 1;
-        }
-
-        int l = left.height();
-        int r = right.height();
-        return l > r ? -1 : (r > l ? 1 : 0);
-    }
-
-    public void assertBalances(HashMap<AVLTreeNode, Integer> map) {
-        if (right == null && left == null) {
-            Assertions.assertEquals(0, map.get(this));
+            Assertions.assertEquals(0, balance);
             return;
         }
 
         if (right == null) {
-            Assertions.assertEquals(-1, map.get(this));
-            left.assertBalances(map);
+            Assertions.assertEquals(-1, balance);
+            left.assertBalances();
             return;
         }
 
         if (left == null) {
-            Assertions.assertEquals(1, map.get(this));
-            right.assertBalances(map);
+            Assertions.assertEquals(1, balance);
+            right.assertBalances();
             return;
         }
 
@@ -69,8 +50,30 @@ public class AVLTreeNode {
         int r = right.height();
         int diff = Math.abs(l - r);
         Assertions.assertTrue(diff <= 1);
-        left.assertBalances(map);
-        right.assertBalances(map);
+        if (l > r)
+            Assertions.assertEquals(-1, balance);
+        if (r > l)
+            Assertions.assertEquals(1, balance);
+        if (r == l)
+            Assertions.assertEquals(0, balance);
+
+        left.assertBalances();
+        right.assertBalances();
+    }
+
+    public void print(int spaces) {
+        for (int i = 0; i < spaces; i++) {
+            System.out.print(" ");
+        }
+
+        System.out.println(key);
+        if (left != null) {
+            left.print(spaces + 1);
+        }
+
+        if (right != null) {
+            right.print(spaces + 1);
+        }
     }
 
     public void assertParents() {

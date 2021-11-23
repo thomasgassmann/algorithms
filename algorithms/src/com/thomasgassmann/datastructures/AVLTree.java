@@ -26,14 +26,10 @@ public class AVLTree {
         return _root;
     }
 
-    public HashMap<AVLTreeNode, Integer> getBalances() {
-        return _balances;
-    }
-
     public void insert(int key) {
         if (_root == null) {
             _root = new AVLTreeNode(key, null, null, null);
-            setBalance(_root, 0);
+            _root.balance = 0;
             return;
         }
 
@@ -51,21 +47,21 @@ public class AVLTree {
         }
 
         AVLTreeNode r = new AVLTreeNode(key, u,null, null);
-        setBalance(r, 0);
+        r.balance = 0;
         if (u.key < r.key) {
             u.right = r;
         } else {
             u.left = r;
         }
 
-        if (getBalance(u) == 0) {
-            setBalance(u, u.left == r ? -1 : 1);
+        if (u.balance == 0) {
+            u.balance = u.left == r ? -1 : 1;
             if (u.parent != null) {
                 upin(u);
             }
         } else {
             // either -1 or 1
-            setBalance(u, 0);
+            u.balance = 0;
             // tree height didn't change, we're done
         }
     }
@@ -94,14 +90,6 @@ public class AVLTree {
 
         u.right = v;
         v.parent = u;
-
-        if (getBalance(u) == -1 && getBalance(v) == -1) {
-            setBalance(u, u.getBalance());
-            setBalance(v, v.getBalance());
-        } else if (getBalance(u) == 0 && getBalance(v) == -1) {
-            setBalance(u, u.getBalance());
-            setBalance(v, v.getBalance());
-        }
     }
 
     private void leftrotate(AVLTreeNode w) {
@@ -128,63 +116,77 @@ public class AVLTree {
         }
 
         u.left = w;
-
-        if (getBalance(u) == 1 && getBalance(w) == 1) {
-            setBalance(u, u.getBalance());
-            setBalance(w, w.getBalance());
-        } else if (getBalance(u) == 0 && getBalance(w) == 1) {
-            setBalance(u, u.getBalance());
-            setBalance(w, w.getBalance());
-        }
-    }
-
-    private int getBalance(AVLTreeNode node) {
-        return _balances.get(node);
-    }
-
-    private void setBalance(AVLTreeNode node, int value) {
-        _balances.put(node, value);
     }
 
     private void upin(AVLTreeNode u) {
         AVLTreeNode w = u.parent;
-        if (getBalance(w) == 0) {
-            setBalance(w, w.left == u ? -1 : 1);
+        if (w.balance == 0) {
+            w.balance = w.left == u ? -1 : 1;
             if (w.parent != null)
                 upin(w);
             return;
         }
 
-        if ((getBalance(w) == 1 && w.left == u) ||
-            (getBalance(w) == -1 && w.right == u)) {
-            setBalance(w, 0);
+        if ((w.balance == 1 && w.left == u) ||
+            (w.balance == -1 && w.right == u)) {
+            w.balance = 0;
             return;
         }
 
         // we now either have bal(w) == 1 or bal(w) == -1
-        // since by our invariant bal(u) != 0, we need to rebalance
+        // since by our invariant bal(u) != 0, we need to re-balance
         // the tree somehow
-        if (getBalance(w) == -1) {
+        if (w.balance == -1) {
             // bal(w) == -1
-            if (getBalance(u) == -1) {
+            if (u.balance == -1) {
                 // new key is in left part
                 // right rotation around w (u is new root, w right of u)
                 rightrotate(w);
+                w.balance = 0;
+                u.balance = 0;
             } else {
                 // bal(u) == 1
+                var prevBalance = u.right.balance;
+                u.right.balance = 0;
+                if (prevBalance < 0) {
+                    w.balance = 1;
+                    u.balance = 0;
+                } else if (prevBalance > 0) {
+                    w.balance = 0;
+                    u.balance = -1;
+                } else {
+                    w.balance = 0;
+                    u.balance = 0;
+                }
+
                 leftrotate(u);
                 rightrotate(w);
             }
         } else {
             // bal(w) == 1
-            if (getBalance(u) == -1) {
+            if (u.balance == -1) {
                 // new key is in left part
+                var prevBalance = u.left.balance;
+                u.left.balance = 0;
+                if (prevBalance < 0) {
+                    w.balance = 0;
+                    u.balance = 1;
+                } else if (prevBalance > 0) {
+                    w.balance = -1;
+                    u.balance = 0;
+                } else {
+                    w.balance = 0;
+                    u.balance = 0;
+                }
+
                 rightrotate(u);
                 leftrotate(w);
             } else {
                 // new key is in right part
                 // left rotation around w (u is new root, w left of u)
                 leftrotate(w);
+                w.balance = 0;
+                u.balance = 0;
             }
         }
     }

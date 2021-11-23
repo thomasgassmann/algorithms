@@ -17,9 +17,11 @@ public class AVLTreeTests {
 
         // Act
         for (int i = values.length - 1; i >= 0; i--) {
-            tree.insert(values[i]);
+            int value = values[i];
+            tree.insert(value);
+            tree.getRoot().print(0);
             tree.getRoot().assertParents();
-            tree.getRoot().assertBalances(tree.getBalances());
+            tree.getRoot().assertBalances();
             tree.getRoot().assertLeftRightInequality();
             for (int j = values.length - 1; j >= i; j--) {
                 Assertions.assertEquals(true, tree.contains(values[j]));
