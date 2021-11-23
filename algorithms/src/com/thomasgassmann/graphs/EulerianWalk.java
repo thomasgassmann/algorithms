@@ -7,7 +7,7 @@ public class EulerianWalk {
     public static ArrayList<Node> EulerianWalk(Graph g) {
         var res = new ArrayList<Node>();
         var markings = new HashMap<Edge, Boolean>();
-        EulerWalk(g, g.nodes.get(0), markings, res);
+        EulerWalk(g, g.vertices.get(0), markings, res);
         return res;
     }
 

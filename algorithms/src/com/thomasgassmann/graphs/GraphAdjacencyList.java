@@ -13,7 +13,7 @@ public class GraphAdjacencyList {
         }
     }
 
-    public int[] getAll() {
+    public int[] getVertices() {
         int[] a = new int[_nodes.length];
         for (int i = 0; i < _nodes.length; i++) {
             a[i] = i;

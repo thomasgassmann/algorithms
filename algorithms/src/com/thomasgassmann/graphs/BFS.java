@@ -9,7 +9,7 @@ public class BFS {
     public static ArrayList<Integer> BFS(GraphAdjacencyList graph) {
         ArrayList<Integer> res = new ArrayList<>();
         HashSet<Integer> active = new HashSet<>();
-        for (var vertex : graph.getAll()) {
+        for (var vertex : graph.getVertices()) {
             BFS(graph, vertex, active, res);
         }
 

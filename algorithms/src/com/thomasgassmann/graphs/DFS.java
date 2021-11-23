@@ -7,7 +7,7 @@ import java.util.HashSet;
 public class DFS {
     public static HashSet<Integer> DFSIterative(GraphAdjacencyList g) {
         HashSet<Integer> visited = new HashSet<Integer>();
-        for (int v : g.getAll()) {
+        for (int v : g.getVertices()) {
             if (!visited.contains(v)) {
                 DFSVisitIterative(g, v, visited);
             }
@@ -18,7 +18,7 @@ public class DFS {
 
     public static HashSet<Integer> DFS(GraphAdjacencyList g) {
         HashSet<Integer> visited = new HashSet<Integer>();
-        for (int v : g.getAll()) {
+        for (int v : g.getVertices()) {
             if (!visited.contains(v)) {
                 DFSVisit(g, v, visited);
             }
