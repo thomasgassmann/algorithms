@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class BowShot {
     public static double K = 97442343.345d;

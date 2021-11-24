@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class SubsetSumNegative {
     public static boolean subsetSumNegative(int[] a, int t) {

@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class NearestMultiple {
     public static int Nearest_Multiple(int[] A, int n, int p, int k) {

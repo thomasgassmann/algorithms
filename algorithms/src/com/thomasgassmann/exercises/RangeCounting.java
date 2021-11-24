@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class RangeCounting {
     public static int Range_Counting(int A[], int n, int k_l, int k_r)

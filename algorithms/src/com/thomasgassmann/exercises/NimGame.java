@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class NimGame {
     // HS2019 8.4

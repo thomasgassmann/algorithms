@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 // HS2021 7.4
 public class AnimalsInZoo {

@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class RoadTrip {
     public static int possibilities(int[] k, int d) {

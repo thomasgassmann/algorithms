@@ -1,4 +1,6 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
+
+import com.thomasgassmann.Indicies;
 
 public class NiceMatrix {
     public static Indicies FindInNiceMatrix(int[][] a, int b) {

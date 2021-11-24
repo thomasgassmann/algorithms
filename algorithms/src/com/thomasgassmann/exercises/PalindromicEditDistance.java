@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class PalindromicEditDistance {
     public static int Palindromic_Edit_Distance(char []A)

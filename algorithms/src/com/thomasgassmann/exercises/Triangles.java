@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class Triangles {
     public static long CountTriangles(int n, int[] A) {

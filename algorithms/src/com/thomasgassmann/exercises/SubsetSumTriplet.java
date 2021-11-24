@@ -1,4 +1,4 @@
-package com.thomasgassmann;
+package com.thomasgassmann.exercises;
 
 public class SubsetSumTriplet {
     public static boolean SubsetSumTriplet(int[] values) {
