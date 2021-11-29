@@ -43,4 +43,36 @@ public class Triangles {
             a[j] = tmp;
         }
     }
+
+    public static long triangles_Solution(int n, int []A)
+    {
+        // n: length of A
+        // A: an array of positive integers
+        long triangles = 0; // the number of triangles may not fit into the int type
+
+        // Sort
+        for (int i = 0; i < n; i++) {
+            int arg_min = i;
+            for (int j = i + 1; j < n; j++)
+                if (A[j] < A[arg_min])
+                    arg_min = j;
+            if (arg_min != i) {
+                int temp = A[i];
+                A[i] = A[arg_min];
+                A[arg_min] = temp;
+            }
+        }
+
+        // Count
+        for (int i = 0; i < n; i++) {
+            int k = i;
+            for (int j = i + 1; j < n; j++) {
+                while (k < n && A[k] <= A[i] + A[j])
+                    k++;
+                triangles += k - j - 1;
+            }
+        }
+
+        return triangles;
+    }
 }
