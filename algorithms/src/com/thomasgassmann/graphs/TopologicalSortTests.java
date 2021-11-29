@@ -46,6 +46,51 @@ public class TopologicalSortTests {
     }
 
     @Test
+    public void assertCycleDetectedTopologicalSortDFS() {
+        // Arrange
+        var graph = new GraphAdjacencyList(8);
+        graph.addDirected(0, 1); // A -> B
+        graph.addDirected(0, 2); // A -> C
+        graph.addDirected(2, 3); // C -> D
+        graph.addDirected(3, 7); // D -> H
+        graph.addDirected(0, 5); // A -> F
+        graph.addDirected(1, 4); // B -> E
+        graph.addDirected(4, 5); // E -> F
+        graph.addDirected(5, 6); // F -> G
+        graph.addDirected(6, 7); // G -> H
+        graph.addDirected(4, 6); // E -> G
+        graph.addDirected(6, 0); // G -> A
+
+        // Act
+        var sort = TopologicalSort.TopologicalSortDFS(graph);
+
+        // Assert
+        Assertions.assertNull(sort);
+    }
+
+    @Test
+    public void assertGeneralTopologicalSortDFS() {
+        // Arrange
+        var graph = new GraphAdjacencyList(8);
+        graph.addDirected(0, 1); // A -> B
+        graph.addDirected(0, 2); // A -> C
+        graph.addDirected(2, 3); // C -> D
+        graph.addDirected(3, 7); // D -> H
+        graph.addDirected(0, 5); // A -> F
+        graph.addDirected(1, 4); // B -> E
+        graph.addDirected(4, 5); // E -> F
+        graph.addDirected(5, 6); // F -> G
+        graph.addDirected(6, 7); // G -> H
+        graph.addDirected(4, 6); // E -> G
+
+        // Act
+        var sort = TopologicalSort.TopologicalSortDFS(graph);
+
+        // Assert
+        AssertionHelpers.AssertEqual(new int[] { 0, 2, 3, 1, 4, 5, 6, 7 }, sort.stream().mapToInt(p -> p).toArray());
+    }
+
+    @Test
     public void assertTopologicalSort() {
         // Arrange
         var graph = new Graph();

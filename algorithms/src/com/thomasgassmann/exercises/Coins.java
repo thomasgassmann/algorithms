@@ -1,5 +1,8 @@
 package com.thomasgassmann.exercises;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Coins {
     private static int n;
     private static int[] E1;
@@ -7,28 +10,6 @@ public class Coins {
 
     private static ArrayList<Integer>[] tree;
     private static int[] dp;
-
-    public static void main(String[] args) {
-        // Uncomment this line if you want to read from a file
-        //In.open("public/large.in");
-        //Out.compareTo("public/large.out");
-
-        n = In.readInt(); // number of nodes
-        E1 = new int[n - 1];
-        E2 = new int[n - 1];
-
-        // edges
-        for(int i = 0; i < n - 1; i++) {
-            // edge between E1[i] and E2[i], such that E1[i] is the parent of E2[i]
-            E1[i] = In.readInt();
-            E2[i] = In.readInt();
-        }
-
-        Out.println(getMinCoins());
-
-        // Uncomment this line if you want to read from a file
-        // In.close();
-    }
 
     public static int getMinCoins() {
         // n = number of nodes

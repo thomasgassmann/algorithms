@@ -39,6 +39,47 @@ public class TopologicalSort {
         return null;
     }
 
+    public static ArrayList<Integer> TopologicalSortDFS(GraphAdjacencyList graph) {
+        var res = new ArrayList<Integer>();
+        var markings = new HashSet<Integer>();
+        var tempMarkings = new HashSet<Integer>();
+
+        for (var val : graph.getVertices()) {
+            if (!markings.contains(val)) {
+                try {
+                    TopologicalSortDFSVisit(graph, val, markings, tempMarkings, res);
+                } catch (NoTopologicalSortException e) {
+                    return null;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private static class NoTopologicalSortException extends Exception {
+    }
+
+    private static void TopologicalSortDFSVisit(GraphAdjacencyList graph, int node, HashSet<Integer> perm, HashSet<Integer> temp, ArrayList<Integer> res) throws NoTopologicalSortException {
+        if (perm.contains(node)) {
+            return;
+        }
+
+        if (temp.contains(node)) {
+            // not a DAG
+            throw new NoTopologicalSortException();
+        }
+
+        temp.add(node);
+        for (var m : graph.getAdjacent(node)) {
+            TopologicalSortDFSVisit(graph, m, perm, temp, res);
+        }
+
+        temp.remove(node);
+        perm.add(node);
+        res.add(0, node);
+     }
+
     // lecture
     public static ArrayList<Integer> TopologicalSortForGraphsWithoutCycles(GraphAdjacencyList graph) {
         var res = new ArrayList<Integer>();
