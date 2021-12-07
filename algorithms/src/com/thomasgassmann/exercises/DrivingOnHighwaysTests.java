@@ -18,7 +18,7 @@ public class DrivingOnHighwaysTests {
         graph.addDirectedEdge(c, d);
         graph.addDirectedEdge(d, b);
 
-        Assertions.assertFalse(DrivingOnHighways.DrivingOnHighways(graph));
+        Assertions.assertFalse(DrivingOnHighways.drivingOnHighways(graph));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class DrivingOnHighwaysTests {
         graph.addDirectedEdge(h, k);
         graph.addDirectedEdge(k, e);
 
-        Assertions.assertFalse(DrivingOnHighways.DrivingOnHighways(graph));
+        Assertions.assertFalse(DrivingOnHighways.drivingOnHighways(graph));
     }
 
     @Test
@@ -76,6 +76,6 @@ public class DrivingOnHighwaysTests {
         graph.addDirectedEdge(h, k);
         graph.addDirectedEdge(k, e);
 
-        Assertions.assertTrue(DrivingOnHighways.DrivingOnHighways(graph));
+        Assertions.assertTrue(DrivingOnHighways.drivingOnHighways(graph));
     }
 }

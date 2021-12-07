@@ -22,4 +22,17 @@ public class GraphWithWeights<T> {
     public void addDirectedEdge(T from, T to, int weight) {
         adjecency.get(from).add(new NodeWithWeight<>(to, weight));
     }
+
+    public int getWeight(T from, T to) {
+        var e = adjecency.get(from).stream().filter(p -> p.value == to).findFirst();
+        if (!e.isPresent()) {
+            throw new IllegalArgumentException();
+        }
+
+        return e.get().weight;
+    }
+
+    public boolean hasEdge(T from, T to) {
+        return adjecency.get(from).stream().anyMatch(p -> p.value == to);
+    }
 }

@@ -19,6 +19,10 @@ public class Stack<T> implements IStack<T> {
 
     @Override
     public T top() {
+        if (p == null) {
+            return null;
+        }
+
         return p.item;
     }
 
