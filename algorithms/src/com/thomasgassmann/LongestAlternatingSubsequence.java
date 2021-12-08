@@ -37,4 +37,36 @@ public class LongestAlternatingSubsequence {
 
         return Math.max(dp[A.length - 1][0], dp[A.length - 1][1]);
     }
+
+    public static int longest_alternating_subsequence_solution(int n, int []A)
+    {
+        // n: length of A
+        // A: an array of distinct integers
+
+        int max_result = 0;
+
+        int []inc = new int[n]; // an increase was last
+        int []dec = new int[n]; // a decrease was last
+
+        inc[0] = 1;
+        dec[0] = 1;
+        for (int i = 1; i < n; i++) {
+            // inc current
+            inc[i] = 1;
+            for (int j = 0; j < i; j++)
+                if (A[j] < A[i])
+                    inc[i] = Math.max(inc[i], dec[j] + 1);
+
+            // dec current
+            dec[i] = 1;
+            for (int j = 0; j < i; j++)
+                if (A[j] > A[i])
+                    dec[i] = Math.max(dec[i], inc[j] + 1);
+
+            max_result = Math.max(max_result, inc[i]);
+            max_result = Math.max(max_result, dec[i]);
+        }
+
+        return max_result;
+    }
 }
