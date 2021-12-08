@@ -33,7 +33,7 @@ public class JohnsonTests {
         Assertions.assertEquals(2, r.get(2).get(6));
         Assertions.assertEquals(3, r.get(3).get(4));
         Assertions.assertEquals(3, r.get(3).get(5));
-        Assertions.assertTrue(!r.get(3).containsKey(0));
+        Assertions.assertFalse(r.get(3).containsKey(0));
         Assertions.assertEquals(-2, r.get(0).get(5));
     }
 
