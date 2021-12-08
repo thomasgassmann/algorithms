@@ -19,9 +19,9 @@ public class PriorityQueue<T> {
         return values.size() == 0;
     }
 
-    public void decreaseKey(T item, int key) {
+    public void decreaseKey(T item, int newPriority) {
         int idx = indicies.get(item);
-        values.get(idx).priority = key;
+        values.get(idx).priority = newPriority;
         restoreHeapConditionUp(idx);
     }
 

@@ -10,7 +10,7 @@ public class GraphWithWeights<T> {
     public Collection<T> getVertices() {
         return adjecency.keySet();
     }
-
+    
     public Collection<NodeWithWeight<T>> getAdjacent(T i) {
         return adjecency.get(i);
     }
