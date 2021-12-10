@@ -1,6 +1,6 @@
 package com.thomasgassmann.exercises;
 
-import com.thomasgassmann.Indicies;
+import com.thomasgassmann.other.Indicies;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
