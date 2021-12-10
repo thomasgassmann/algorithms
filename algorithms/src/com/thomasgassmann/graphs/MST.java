@@ -7,6 +7,58 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class MST {
+    public static <T> ArrayList<EdgeWithWeights<T>> Kruksal(GraphWithWeights<T> graph) {
+        var edges = new ArrayList<EdgeWithWeights<T>>();
+        for (var u : graph.getVertices()) {
+            for (var v : graph.getAdjacent(u)) {
+                edges.add(new EdgeWithWeights<>(u, v.value, v.weight));
+            }
+        }
+
+        SortEdges(edges, 0, edges.size() - 1);
+        var mst = new ArrayList<EdgeWithWeights<T>>();
+        var uf = UnionFind.<T>make(graph);
+        for (int i = 0; i < edges.size(); i++) {
+            var e = edges.get(i);
+            if (!uf.same(e.to, e.from)) {
+                uf.union(e.to, e.from);
+                mst.add(e);
+            }
+        }
+
+        return mst;
+    }
+
+    private static <T> void SortEdges(ArrayList<EdgeWithWeights<T>> arr, int from, int to) {
+        if (from >= to) {
+            return;
+        }
+
+        var part = Partition(arr, from, to);
+        SortEdges(arr, from, part);
+        SortEdges(arr, part + 1, to);
+    }
+
+    private static <T> int Partition(ArrayList<EdgeWithWeights<T>> arr, int from, int to) {
+        int i = from - 1;
+        int j = to + 1;
+        int pivot = arr.get(from).weight;
+        while (i <= j) {
+            while (arr.get(++i).weight < pivot);
+            while (arr.get(--j).weight > pivot);
+
+            if (i >= j) {
+                return j;
+            }
+
+            var tmp = arr.get(i);
+            arr.set(i, arr.get(j));
+            arr.set(j, tmp);
+        }
+
+        return j;
+    }
+
     public static <T> ArrayList<EdgeWithWeights<T>> Prim(GraphWithWeights<T> graph) {
         var q = new PriorityQueue<EdgeWithWeights<T>>();
         var mst = new ArrayList<EdgeWithWeights<T>>(graph.getVertices().size() - 1);

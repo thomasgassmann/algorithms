@@ -39,7 +39,7 @@ public class UnionFind<T> {
             v = tmp;
         }
 
-        for (var x : _members.get(u)) {
+        for (var x : _members.get(_rep.get(u))) {
             _rep.put(x, _rep.get(v));
             var m = _members.get(_rep.get(v));
             m.add(x);

@@ -8,6 +8,14 @@ import java.util.function.Predicate;
 
 public class MSTTests {
     @Test
+    public void checkKruksal() {
+        var g = getExampleGraph();
+        var r = MST.Kruksal(g);
+
+        assertMst(r);
+    }
+
+    @Test
     public void checkBoruvka() {
         var g = getExampleGraph();
         var r = MST.Boruvka(g);
