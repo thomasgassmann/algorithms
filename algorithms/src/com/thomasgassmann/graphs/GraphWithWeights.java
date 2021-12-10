@@ -7,6 +7,14 @@ import java.util.HashMap;
 public class GraphWithWeights<T> {
     private HashMap<T, ArrayList<NodeWithWeight<T>>> adjecency = new HashMap<>();
 
+    public T getAnyVertex() {
+        if (adjecency.keySet().size() == 0) {
+            return null;
+        }
+
+        return adjecency.keySet().iterator().next();
+    }
+
     public Collection<T> getVertices() {
         return adjecency.keySet();
     }
@@ -21,6 +29,11 @@ public class GraphWithWeights<T> {
 
     public void addDirectedEdge(T from, T to, int weight) {
         adjecency.get(from).add(new NodeWithWeight<>(to, weight));
+    }
+
+    public void addUndirectedEdge(T from, T to, int weight) {
+        addDirectedEdge(from, to, weight);
+        addDirectedEdge(to, from, weight);
     }
 
     public int getWeight(T from, T to) {
