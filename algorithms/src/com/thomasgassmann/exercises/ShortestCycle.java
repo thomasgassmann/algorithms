@@ -71,7 +71,7 @@ class Graph {
             m[v] = count++;
         }
 
-        var resultCandidates = new PriorityQueue<Pair>();
+        var min = Integer.MAX_VALUE;
         while (q.size() != 0) {
             var c = q.poll();
             for (int i = 0; i < degrees[c.index]; i++) {
@@ -84,7 +84,7 @@ class Graph {
                 if (m[w] != m[c.index] && m[w] != 0) {
                     var possibleDistance = d[w] + d[c.index] + weight;
                     if (possibleDistance > 0) {
-                        resultCandidates.add(new Pair(c.index ^ w, possibleDistance));
+                        min = Math.min(min, possibleDistance);
                     }
 
                     continue;
@@ -99,8 +99,7 @@ class Graph {
             }
         }
 
-        var min = resultCandidates.poll();
-        return min.value;
+        return min;
     }
 }
 
