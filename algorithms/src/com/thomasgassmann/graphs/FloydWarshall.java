@@ -36,6 +36,13 @@ public class FloydWarshall {
             }
         }
 
+        // check for negative cycle in graph
+        for (int i = 0; i < n; i++) {
+            if (d[i][i] != null && d[i][i] < 0) {
+                return null;
+            }
+        }
+
         return succ;
     }
 }

@@ -1,9 +1,25 @@
 package com.thomasgassmann.graphs;
 
 import com.thomasgassmann.AssertionHelpers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class FloydWarshallTests {
+    @Test
+    public void checkForNegativeCycle() {
+        var graph = new GraphWithWeights<Integer>();
+        graph.addVertex(0);
+        graph.addVertex(1);
+        graph.addVertex(2);
+        graph.addDirectedEdge(0, 1, -1);
+        graph.addDirectedEdge(1, 2, 2);
+        graph.addDirectedEdge(2, 0, -2);
+
+        var res = FloydWarshall.FloydWarshall(graph);
+
+        Assertions.assertNull(res);
+    }
+
     @Test
     public void checkFloydWarshall() {
         var graph = new GraphWithWeights<Integer>();
