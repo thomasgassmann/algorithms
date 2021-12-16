@@ -1,7 +1,10 @@
 package com.thomasgassmann.dp;
 
 public class IsShuffle {
-    // Probe Test A&D HS2021
+    // A&D HS2021
+    // Given a char Array A of length n, a char Array B of length m and a char Array C of length n+m
+    //
+    // Determine if C can be found via a 'straight shuffle' (like putting two decks of cards into one another) of A and B, this basically means that each letter in C can be found in A or B and the internal order of A and B is preserved
     public static boolean isShuffle(int n, int m, char[] A, char[] B, char[] C)
     {
         //The input arrays A, B and C are indexed from 1 instead of 0 in the code.
