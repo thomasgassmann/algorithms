@@ -58,4 +58,34 @@ public class Coins {
 
         dp[v] = coins;
     }
+
+    private static ArrayList<Integer>[] edges;
+
+    private static int DFS_Solution(int node) {
+        int[] valChildren = new int[edges[node].size()];
+        for (int i = 0; i < edges[node].size(); i++) {
+            valChildren[i] = DFS_Solution(edges[node].get(i));
+        }
+        Arrays.sort(valChildren);
+
+        int minCoins = 1;
+        for (int j = 0; j < edges[node].size(); j++) {
+            minCoins = Math.max(minCoins, valChildren[j] + edges[node].size() - j - 1);
+        }
+        return minCoins;
+    }
+
+    public static int getMinCoins_Solution() {
+        // n = number of nodes
+        // for 0 <= i < n - 1, there is an edge between E1[i] and E2[i], such that E1[i] is the parent of E2[i]
+
+        edges = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
+            edges[i] = new ArrayList<Integer>();
+        }
+        for (int i = 0; i < n - 1; i++) {
+            edges[E1[i]].add(E2[i]);
+        }
+        return DFS_Solution(0);
+    }
 }
