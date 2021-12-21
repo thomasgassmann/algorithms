@@ -14,7 +14,7 @@ public class Knapsack {
         for (int i = 0; i < av.length; i++)
             av[i] = (int)Math.floor(values[i] / K);
 
-        return DPWeightBased(values, weights, maxWeight);
+        return DPWeightBased(av, weights, maxWeight);
     }
 
     public static int[] DPWeightBased(int[] values, int[] weights, int maxWeight) {
